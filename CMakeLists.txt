@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15) 
 
-set(PROJECT_NAME Laba7)					 
+set(PROJECT_NAME Illhavesevennumbernines)					 
 project("${PROJECT_NAME}")
 
 
@@ -12,3 +12,5 @@ add_executable("${PROJECT_NAME}"
 				Illhavesevennumbernines.cpp
 				Function.hpp
 				Function.cpp)
+
+file(COPY "input.txt" DESTINATION "/")
