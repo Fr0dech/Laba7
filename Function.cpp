@@ -45,42 +45,39 @@ namespace fr0dech
 			maxsum += max % 10;
 			max /= 10;
 		}
-		int matrixtemp[100][100];
-		int matrixtempsum = 0;
-		for (int i = 0; i < *n; i++)
-			for (int j = 0; j < *m; j++)
+		int matrixtemp[100];
+		int sum = 0;
+		for (int j = 0; j < *m; j++)
+		{
+			for (int i = 0; i < *n; i++)
 			{
-				matrixtemp[i][j] = matrix[i][j];
-				while (matrixtemp[i][j] != 0)
-				{
-					matrixtempsum += matrixtemp[i][j] % 10;
-					matrixtemp[i][j] /= 10;
-				}
-				matrixtemp[i][j] = matrixtempsum;
-				matrixtempsum = 0;
+				sum += matrix[i][j];
 			}
+			matrixtemp[j] = sum;
+			sum = 0;
+		}
 
 		if (abs(maxsum - minsum) <= 2)
 		{
 			int temp, tempm;
-			for (int i = 0; i < *n; i++)
-			{
 				for (int j = 0; j < *m; j++)
 				{
 					for (int k = 0; k < *m; k++)
 					{
-						if (matrixtemp[j][i] < matrixtemp[k][i])
+						if (matrixtemp[j] < matrixtemp[k])
 						{
-							temp = matrixtemp[k][i];
-							tempm = matrix[k][i];
-							matrixtemp[k][i] = matrixtemp[j][i];
-							matrix[k][i] = matrix[j][i];
-							matrixtemp[j][i] = temp;
-							matrix[j][i] = tempm;
+							for (int i = 0; i < *n; i++)
+							{
+									temp = matrixtemp[k];
+									tempm = matrix[i][k];
+									matrixtemp[k] = matrixtemp[j];
+									matrix[i][k] = matrix[i][j];
+									matrixtemp[j] = temp;
+									matrix[i][j] = tempm;
+							}
 						}
 					}
 				}
-			}
 		}
 	}
 
